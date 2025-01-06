@@ -27,8 +27,20 @@ const isProtectedPath = (path) =>
 // bff endpoints
 const isApiPath = (path) => ["/api/"].findIndex((p) => path.includes(p)) !== -1;
 
+// check for path access
+const isAccessible = (path: string, role?: Role) => {
+  if (path.startsWith(`/${Role.CREATOR}`)) {
+    return role === Role.CREATOR;
+  }
+  return !role || role === Role.USER;
+};
+
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.match(nextAppPathRegex)) {
+    console.log(
+      request.nextUrl.pathname,
+      request.nextUrl.pathname.startsWith("/account/logout")
+    );
     if (request.nextUrl.pathname.startsWith("/account/logout")) {
       // logging out user
       // end session in backend
@@ -45,7 +57,11 @@ export async function middleware(request: NextRequest) {
     const { isAuthenticated, data } = useAuthStore().getState();
 
     // route guards
-    if (isAuthPath(request.nextUrl.pathname)) {
+    if (
+      isAuthPath(request.nextUrl.pathname) ||
+      // is authenticated and trying to access a path that is not accessible for the role
+      (isAuthenticated && !isAccessible(request.nextUrl.pathname, data.role))
+    ) {
       if (isAuthenticated) {
         // redirect to role home page
         return NextResponse.redirect(
