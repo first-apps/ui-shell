@@ -1,10 +1,10 @@
-export interface AuthInitialDataDto {
+export interface AuthStateDto {
   isAuthenticated: boolean;
   data: null | AuthData;
 }
 
-export interface AutInitialStateDto extends AuthInitialDataDto {
-  login: (data: AuthInitialDataDto["data"]) => void;
+export interface AuthActionDto {
+  login: (data: AuthStateDto["data"]) => void;
   logout: () => void;
 }
 

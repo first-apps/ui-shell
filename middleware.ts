@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { useAuthStore } from "./app/store";
+// import { useAuthStore } from "./app/store";
 import { Role } from "./app/models";
 
 /*
@@ -37,15 +37,11 @@ const isAccessible = (path: string, role?: Role) => {
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.match(nextAppPathRegex)) {
-    console.log(
-      request.nextUrl.pathname,
-      request.nextUrl.pathname.startsWith("/account/logout")
-    );
     if (request.nextUrl.pathname.startsWith("/account/logout")) {
+      // TODO:
       // logging out user
       // end session in backend
       // clear authState
-      useAuthStore().getState().logout();
       // redirect to login page
       return NextResponse.redirect(new URL("/account/login", request.url));
     }
@@ -53,8 +49,12 @@ export async function middleware(request: NextRequest) {
     // refresh token - update the state according to the token availability and expiry
     // notify the client that session is expired, if the token is present but expired (applies for both creator and user)
 
-    // get the latest state after refresh token
-    const { isAuthenticated, data } = useAuthStore().getState();
+    // TODO: get the latest state after refresh token
+    // const { isAuthenticated, data } = useAuthStore((state) => state);
+    const isAuthenticated = true;
+    const data = {
+      role: "creator",
+    };
 
     // route guards
     if (
