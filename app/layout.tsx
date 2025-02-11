@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { PageContainer } from "@first-apps/shared/components";
 
 export const metadata: Metadata = {
   title: "Shell App",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <PageContainer>{children}</PageContainer>
+      </body>
     </html>
   );
 }
