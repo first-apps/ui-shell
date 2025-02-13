@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { PageContainer } from "@first-apps/shared/components";
 
 export const metadata: Metadata = {
@@ -14,6 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="/css/core.css" />
+      </head>
       <body>
         <PageContainer>{children}</PageContainer>
       </body>
