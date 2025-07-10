@@ -51,10 +51,11 @@ export async function middleware(request: NextRequest) {
 
     // TODO: get the latest state after refresh token
     // const { isAuthenticated, data } = useAuthStore((state) => state);
-    const isAuthenticated = true;
-    const data = {
-      role: "creator",
-    };
+    const isAuthenticated = false;
+    // const data = {
+    //   role: "creator",
+    // };
+    const data = null;
 
     // route guards
     if (

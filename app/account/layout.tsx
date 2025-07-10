@@ -4,7 +4,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="twcssflex flex-row">
       <h1>Account Pages</h1>
       {children}
     </div>

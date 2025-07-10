@@ -23,8 +23,9 @@ export default function Login() {
   return (
     <>
       <Button onClick={handleLogin}>Login</Button>
-      <Button>Get Session</Button>
-      <Link href="/creator">Creator</Link>
+      <Button className="twcss-mx-10">Get Session</Button>
+      <a href="/creator">Creator</a>
+      {/* <Link href="/creator">Creator</Link> */}
     </>
   );
 }
